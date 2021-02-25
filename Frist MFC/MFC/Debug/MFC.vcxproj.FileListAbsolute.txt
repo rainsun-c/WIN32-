@@ -1,0 +1,2 @@
+D:\win32Code\MFC\Debug\MFC.exe
+D:\win32Code\MFC\Debug\MFC.pdb

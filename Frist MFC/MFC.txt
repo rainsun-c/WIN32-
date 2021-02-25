@@ -1,0 +1,207 @@
+从win32过度到MFC
+
+建立MFC工程三部曲：
+1、建立CWinApp类的派生类
+2、重写CWinApp虚函数InitInstance函数
+3、定义CWinApp派生类的全局变量
+
+常用类
+一、Cstring类型   C++封装的类
+        CString str(L"hello");
+        CString str=L"hello";
+        
+        
+        
+    setWindText(str);
+        CString str=L"hello";
+        int n=str.GetLength()  // 这里指的是字符个数，不是字节数
+        
+    判断是否为空
+        BOOL b=CString str.IsEmpty();// 是空为真
+        
+    清空字符串
+        str.Empty();
+        
+    访问字符串每个元素
+        TCHAR ch =str[1];//数组方式访问
+        TCHAR ch =str.GetAt(1);//成员函数
+        
+    判断是否相等
+        if(str1==str2){}
+        
+    字符串连接
+        str =str1+str2;
+        
+    比大小
+        if(str>str2)//成立返回真
+        str.Compare(str1);1比2大返回真，相等为0
+    
+    字符串截取
+    str=L"hhhhh hssss"
+        CString str3=str.Mid(6,5)//从第6个开始截取，截取5个。
+        CString str4=str.Mid(6)//从第6个开始,全部截取。
+        
+    左边开始截取
+    Cstring str= str.Left(4)// 左边开始截取4个
+    右边开始截取
+    str.Right();
+    
+    装换大小写
+    CString str5=str.MakeUpper()
+    CString str5=str.MakeLower()
+    
+    反转法
+    str3 =str.MakeReverse();
+    
+    替换字符
+    int n = str.Replace ('o','5');把o替换成5；返回值是替换的个数
+    替换字符串
+    str.Replace(L"xxx",L"afsf")
+        
+    移除字符
+    str.Remove('o');
+    
+    插入
+    sttr.Insert(2,'y');第二个字符位置插入
+    
+    格式化函数
+    int j=9;
+    float z=9.8;
+    TCHAR c=z;
+    str.Fomat(L"大%d幅%f度%c发",j,z,c);
+    
+    去左右空格（不能去中间空格）
+    str5=str.Trim();
+    去左空格
+    str5=str.TrimRight();
+    去右空格
+    str5=str.TrimLeft();
+    
+    查找函数
+    int pos = str.Find('a')（没有返回-1）有返回位置
+     int pos = str.Find(L"sda")
+    
+    
+    怎么截取text.txt
+    CString str=L"C:\\hhh\\text.txt"
+    
+    int pos = str.ReverseFind("\\");   反着截取
+    str3 = str.Mid(pos+1);
+    
+    MFC 转换成C语言字符串
+    TCHAR * p=str.GetBuffer();
+    
+    
+二、CPoint类代表点    类型名
+        POINT结构体
+        POINT结构体
+            CPOINT p1(4,5);坐标wei(4,5);
+        
+        移动
+        p1.Offset(-13,3)  x移动-13格，y移动3格
+        
+        点可以判断相等，但是没有大小
+        p1==p2
+        p1+p2;
+        
+        获取鼠标当前消息
+        
+        CPoint pt;
+        GetCursorPos(&pt);
+        CString str;
+        str.Format (L"当前鼠标位置:(%d,%d)",pt.x,pt.y);
+        
+三、CSize类
+    代表一个大小，多态，多宽，多宽
+    SIZE
+    CSize s1(23,56);
+    CSize s2(23,56);
+    CSize s3(23,56);
+    s1==s2;
+    s1!=s2;
+    CSize s3=s1+s2;
+        
+        
+四、CRect类  代表一个矩形区域   四个点 上下左右   取左上角与右下角的点        
+    
+        CRect rect(10,20,15,60)    
+        获取左上角
+        CPoint lefttop=rect.TopLeft();
+        获取右下角
+        CPoint center = rect.CenterPoint();
+        获取中间点
+        CPoint Center = rect.CenterPoint();
+        判断点是否在矩形区
+        rect.PtInRect(p2);
+        if(TRUE==rect.PtInRect(p2))   真在,假不在
+        
+        判断矩形区域为空 （表示可能是直线）即是不是矩形
+        CRect rect2={0,0,0,0}
+        if（FALSE == rect.IsRectEmpty()）//可能是直线
+        {
+        
+        }
+        rect.IsRectNULL;//四个值全是0，
+        
+        
+       
+        
+        获取窗口大小  （以当前窗口左上角为原点）
+        CRect wnRect;
+        GetWindowRect(&wnRect);
+        
+       
+        CSTring str
+
+        CString str;
+        
+        str.Format (L"当前窗口大小:(%d,%d,%d.%d)",wnRect.left,wnRect.top,wnRect.right,wnRect.bottom);左上右下
+        
+        
+5、CTime类
+
+    CTime time =CTime:: GetCurrentTime();   静态数据成员（static不属于对象，只属于类）
+    int nYear =time.GetYear();
+    int nMonth=time.GetMonth();
+    int nDay = time.GetDay();
+    int nHour = time.GetHour();
+    int nMinute = time.GetMinute();
+    int nSecond = time.GetSecond();
+    int nDay0fWeek = time.GetDay0fWeek();
+    2种方式：
+       1、 
+       CString str;
+       str.Format(L"当前时间： %d-%d-%d %02d:%d:%d"，nYear，。。);   %02d  2个字符宽度，不足补0；
+       2、
+       //时间格式化为字符串
+       time.Format(L"当前时间：%Y,%m-%d %H:%M:%S");
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
